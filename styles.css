@@ -34,7 +34,7 @@ body {
 .page:nth-child(even) {
     background-color: #cce7ff;
 }
-
+  
 /* Optional navigation */
 .nav {
     position: fixed;

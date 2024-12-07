@@ -4,14 +4,23 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CS-4460 Prototype v1</title>
-    <link rel="stylesheet" type="text/css"  href="styles.css">
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <div class="container">
-        <section class="page">Page 1</section>
-        <section class="page">Page 2</section>
-        <section class="page">Page 3</section>
-        <section class="page">Page 4</section>
+        <section class="page">
+            Page 1
+        </section>
+        <section class="page">
+            Page  2 &emsp;
+            <svg id="p2" width="600" height="800" style="border: 1px solid #777;"></svg>
+        </section>
+        <section class="page">
+            Page 3
+        </section>
+        <section class="page">
+            Page 4
+        </section>
     </div>
 
     <!-- Optional Navigation -->
@@ -22,6 +31,8 @@
         <button class="dot" data-page="3"></button>
     </div>
 
+    <script src="https://d3js.org/d3.v5.min.js"></script>
+    <script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
     <script src="./main.js"></script>
 </body>
 </html>
