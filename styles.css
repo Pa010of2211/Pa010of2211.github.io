@@ -1,0 +1,60 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    scroll-behavior: smooth; /* Smooth scroll for the whole document */
+    overflow: hidden; /* Prevent default scrolling */
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    height: 100vh; /* One page per section */
+    overflow: auto; /* Allow controlled scrolling */
+    scroll-snap-type: y mandatory; /* Snap to each section vertically */
+}
+
+.page {
+    flex: 0 0 100vh; /* Each page takes full viewport height */
+    scroll-snap-align: start; /* Snap to the start of each page */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+}
+
+.page:nth-child(odd) {
+    background-color: #f0f0f0;
+}
+
+.page:nth-child(even) {
+    background-color: #cce7ff;
+}
+
+/* Optional navigation */
+.nav {
+    position: fixed;
+    top: 50%;
+    right: 20px;
+    transform: translateY(-50%);
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.nav button {
+    background: none;
+    border: 2px solid #333;
+    border-radius: 50%;
+    width: 15px;
+    height: 15px;
+    cursor: pointer;
+}
+
+.nav button.active {
+    background-color: #333;
+} 
