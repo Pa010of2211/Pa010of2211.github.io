@@ -120,3 +120,13 @@ circle.highlight {
   .d3-tip thead tr {
     padding-top: 10px;
   }
+
+text.xaxis-label {
+    font-size: 18px;
+    font-weight: 600;
+}
+
+text.yaxis-label {
+    font-size: 24px;
+    font-weight: 600;
+}
