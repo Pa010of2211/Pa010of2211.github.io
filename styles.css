@@ -130,3 +130,22 @@ text.yaxis-label {
     font-size: 24px;
     font-weight: 600;
 }
+
+.pm-8-axis-label {
+    font-size: 12px;
+    fill: #333;
+}
+.pm-8-area {
+    fill: steelblue;
+    opacity: 0.6;
+}
+.pm-8-line {
+    stroke: steelblue;
+    stroke-width: 2;
+    fill: none;
+}
+
+text.star-plot-label {
+    font-size: 18px;
+    font-weight: 500;
+}

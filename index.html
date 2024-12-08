@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CS-4460 Prototype v1</title>
+    <title>CS-4460 Prototype v1.1</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -21,6 +21,10 @@
         <section class="page">
             Page 4
         </section>
+        <section class="page">
+            Page 5 &emsp;
+            <svg id="p5" width="650" height="350" style="border: 1px solid #777;"></svg>
+        </section>
     </div>
 
     <!-- Optional Navigation -->
@@ -29,11 +33,17 @@
         <button class="navdot" data-page="1"></button>
         <button class="navdot" data-page="2"></button>
         <button class="navdot" data-page="3"></button>
+        <button class="navdot" data-page="4"></button>
     </div>
 
     <script src="https://d3js.org/d3.v6.min.js"></script>
-    <script src="./d3-tip.js"></script>
+    <script src="./js/d3-tip.js"></script>
     <script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
-    <script src="./main.js"></script>
+    <script src="./js/rankify.js"></script>
+
+    <script src="./js/bp-3.js"></script>
+    <script src="./js/pm-8.js"></script>
+
+    <script src="./js/main.js"></script>
 </body>
 </html>

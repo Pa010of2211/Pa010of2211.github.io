@@ -1,29 +1,3 @@
-//Section: Make interactive dots
-const dots = document.querySelectorAll('.navdot');
-const pages = document.querySelectorAll('.page');
-const container = document.querySelector('.container');
-
-dots.forEach(dot => {
-    dot.addEventListener('click', () => {
-        const index = dot.getAttribute('data-page');
-        pages[index].scrollIntoView({ behavior: 'smooth' });
-    });
-});
-
-// Highlight active dot
-const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-        const index = Array.from(pages).indexOf(entry.target);
-        if (entry.isIntersecting) {
-            dots.forEach(dot => dot.classList.remove('active'));
-            dots[index].classList.add('active');
-        }
-    });
-}, { threshold: 0.7 });
-
-pages.forEach(page => observer.observe(page));
-
-//Section: BP-3 v1
 var svg = d3.select('#p2');
 
 // Get layout parameters
@@ -86,7 +60,7 @@ scatterplot.append('text')
 
 scatterplot.append('text')
     .attr('class', 'xaxis-label')
-    .attr('transform', 'translate('+[100, 740]+')').text("2023 Teams");
+    .attr('transform', 'translate('+[25, 740]+')').text("Non-Postseason Teams");
 
 scatterplot.append('text')
     .attr('class', 'xaxis-label')
@@ -128,10 +102,10 @@ d3.csv('data/team_data.csv').then(function(dataset) {
     svg.call(toolTip1);
 
     scatterplot.selectAll(".dotp1")
-        .data(dataset).enter()
+        .data(dataset.filter(d => +d['Playoff'] == 0)).enter()
         .append("circle")
         .attr('class', 'dotp1')
-        .attr("cx", d => xScale(0.9 + Math.random() * 0.2))
+        .attr("cx", d => xScale(0.65 + Math.random() * 0.2))
         .attr("cy", d => yScale(+d['WL%']))
         .attr("r", 5)
         .attr("fill", d => {
