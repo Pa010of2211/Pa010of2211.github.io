@@ -1,20 +1,16 @@
-var pm8_data = new Map([]);
+var bp5_data = new Map([]);
 
 Promise.all([
-    d3.csv('./data/team_data.csv'),
-    d3.csv("./data/team_pitching.csv")
-]).then(([datab, datap]) => {
-    const rankedData1 = calculateRanks(datab);
-    const rankedData2 = calculateRanks(datap);
-    //console.log(rankedData2[5]);
-    pm8_data.set('HR perc.', +rankedData1[5]['HR_rank']/30);
-    pm8_data.set('OBP perc.', +rankedData1[5]['OBP_rank']/30);
-    pm8_data.set('TB perc.', +rankedData1[5]['TB_rank']/30);
-    pm8_data.set('F% perc.', +rankedData1[5]['Fld%_rank']/30);
-    pm8_data.set('WHIP perc.', +rankedData2[5]['WHIP_rank']/30);
-
-    // console.log(Array.from(pm8_data.entries()));
-
+    d3.csv('./data/player_savant_data.csv'),
+]).then(([data]) => {
+    const rankedData = calculateRanks(data);
+    console.log(rankedData.length);
+    bp5_data.set('xWOBA', +rankedData[97]['xwoba_rank']/rankedData.length);
+    bp5_data.set('Sweet Spot %', +rankedData[97]['sweet_spot_percent_rank']/rankedData.length);
+    bp5_data.set('Barrel %', +rankedData[97]['barrel_batted_rate_rank']/rankedData.length);
+    bp5_data.set('K %', 1-(+rankedData[97]['k_percent_rank']/rankedData.length));
+    bp5_data.set('Exit Velocity', +rankedData[97]['avg_hyper_speed_rank']/rankedData.length);
+    console.log(Array.from(bp5_data.entries()));
 
     const maxValue = 1;  // Maximum value for normalization
     const levels = 5;
@@ -27,7 +23,7 @@ Promise.all([
     var radius = Math.min(svgWidth/2, (svgHeight-50)) / 2 - margin;
 
     svg_center = svg.append("g")
-        .attr("transform", `translate(${svgWidth / 3.75}, ${svgHeight / 2 - 20})`);
+        .attr("transform", `translate(${svgWidth / 2 + (svgWidth / 3.75)}, ${svgHeight / 2 - 20})`);
     // Scale for radius
     const rScale = d3.scaleLinear()
         .domain([0, maxValue])
@@ -35,10 +31,10 @@ Promise.all([
 
     svg_center.append('text')
         .attr('class', 'star-plot-label')
-        .attr('transform', 'translate('+[-120,175]+')').text("Texas Rangers, 2023 (relative)");
+        .attr('transform', 'translate('+[-120,175]+')').text("Corey Seager, 2023 (relative)");
 
     // Angle for each axis
-    const angleSlice = (Math.PI * 2) / pm8_data.size;
+    const angleSlice = (Math.PI * 2) / bp5_data.size;
 
     // Draw concentric circles
     for (let i = 1; i <= levels; i++) {
@@ -53,7 +49,7 @@ Promise.all([
 
     // Draw axis lines
     const axes = svg_center.selectAll(".axis")
-        .data(pm8_data.entries())
+        .data(bp5_data.entries())
         .enter().append("g")
         .attr("class", "axis");
 
@@ -73,7 +69,7 @@ Promise.all([
         .attr("text-anchor", "middle")
         .text(d => d[0]);
 
-    const closedData = [...Array.from(pm8_data.entries()), Array.from(pm8_data.entries())[0]];
+    const closedData = [...Array.from(bp5_data.entries()), Array.from(bp5_data.entries())[0]];
 
     // Line generator for data points
     const lineGenerator = d3.lineRadial()
@@ -94,7 +90,7 @@ Promise.all([
 
     // Add points
     svg_center.selectAll(".point")
-        .data(pm8_data.entries())
+        .data(bp5_data.entries())
         .enter().append("circle")
         .attr("class", "point")
         .attr("cx", (d, i) => rScale(d[1]) * Math.cos(angleSlice * i - Math.PI / 2))
