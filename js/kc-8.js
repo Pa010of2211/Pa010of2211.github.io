@@ -77,12 +77,12 @@ d3.csv("./data/team_data.csv").then(data => {
                 d3.select(this).remove();
             });
 
-        kc8_bars.selectAll(".label").remove();
-        kc8_bars.selectAll(".label")
+        kc8_bars.selectAll(".kc8_pg").remove();
+        kc8_bars.selectAll(".kc8_pg")
             .data(top8)
             .enter()
             .append("text")
-            .attr("class", "label")
+            .attr("class", "kc8_pg")
             .attr("x", d => xScale(d['Team']) + xScale.bandwidth() / 2)
             .attr("y", svgHeight - 15) // Position below the bars
             .attr("text-anchor", "middle")
