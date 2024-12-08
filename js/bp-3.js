@@ -96,7 +96,25 @@ d3.csv('data/team_data.csv').then(function(dataset) {
     
     bp3_svg.call(toolTip1);
 
-    scatterplot.selectAll(".dotp1")
+    sp_points = scatterplot.selectAll(".bp3_dot")
+        .data(dataset).enter()
+        .append("circle")
+        .attr('class', 'bp3_dot')
+        .attr("cx", function (d) {
+            var xbase = 1.9;
+            if (d['Playoff'] == 0) {
+                xbase = 0.65;
+            };
+            return bp3_xScale(xbase + Math.random() * 0.2);
+        })
+        .attr("cy", d => bp3_yScale(+d['WL%']))
+        .attr("r", 5)
+        .attr("fill", d => {
+            const value = d['Playoff'];
+            return value != null ? colorScale(value) : "#000000";
+        }).on('mouseover', toolTip1.show)
+        .on('mouseout', toolTip1.hide);
+    /*scatterplot.selectAll(".dotp1")
         .data(dataset.filter(d => +d['Playoff'] == 0)).enter()
         .append("circle")
         .attr('class', 'dotp1')
@@ -120,7 +138,7 @@ d3.csv('data/team_data.csv').then(function(dataset) {
             const value = d['Playoff'];
             return value != null ? colorScale(value) : "#000000";
         }).on('mouseover', toolTip1.show)
-        .on('mouseout', toolTip1.hide);;
+        .on('mouseout', toolTip1.hide);*/
 
     function spbrushstart(event) {
         // Check if this g element is different than the previous brush
@@ -151,9 +169,9 @@ d3.csv('data/team_data.csv').then(function(dataset) {
                 return e[0] <= bp3_yScale(d['WL%']) && bp3_yScale(d['WL%']) <= e[1];
             });
 
-            bp3_svg.selectAll(".dotp1,.dotp2").classed("hidden", true).classed("highlight", false);
+            bp3_svg.selectAll(".bp3_dot").classed("hidden", true).classed("highlight", false);
             
-            bp3_svg.selectAll(".dotp1,.dotp2").data(dataset).classed("hidden", d => !selectedPoints.includes(d))
+            bp3_svg.selectAll(".bp3_dot").data(dataset).classed("hidden", d => !selectedPoints.includes(d))
                 .classed("highlight", d => selectedPoints.includes(d));
             /*
             svg.selectAll(".dotp2").classed("hidden", true).classed("highlight", false);
