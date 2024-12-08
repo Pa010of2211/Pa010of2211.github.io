@@ -114,31 +114,6 @@ d3.csv('data/team_data.csv').then(function(dataset) {
             return value != null ? colorScale(value) : "#000000";
         }).on('mouseover', toolTip1.show)
         .on('mouseout', toolTip1.hide);
-    /*scatterplot.selectAll(".dotp1")
-        .data(dataset.filter(d => +d['Playoff'] == 0)).enter()
-        .append("circle")
-        .attr('class', 'dotp1')
-        .attr("cx", d => bp3_xScale(0.65 + Math.random() * 0.2))
-        .attr("cy", d => bp3_yScale(+d['WL%']))
-        .attr("r", 5)
-        .attr("fill", d => {
-            const value = d['Playoff'];
-            return value != null ? colorScale(value) : "#000000";
-        }).on('mouseover', toolTip1.show)
-        .on('mouseout', toolTip1.hide);
-
-    scatterplot.selectAll(".dotp2")
-        .data(dataset.filter(d => +d['Playoff'] > 0)).enter()
-        .append("circle")
-        .attr('class', 'dotp2')
-        .attr("cx", d => bp3_xScale(1.9 + Math.random() * 0.2))
-        .attr("cy", d => bp3_yScale(+d['WL%']))
-        .attr("r", 5)
-        .attr("fill", d => {
-            const value = d['Playoff'];
-            return value != null ? colorScale(value) : "#000000";
-        }).on('mouseover', toolTip1.show)
-        .on('mouseout', toolTip1.hide);*/
 
     function spbrushstart(event) {
         // Check if this g element is different than the previous brush
