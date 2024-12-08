@@ -12,7 +12,6 @@ d3.csv("data/player_pitchers_top_200_SOs.csv").then(data => {
 
     var top20 = data.sort((a, b) => a.ERA - b.ERA).slice(0, 20);
 
-    console.log(top20);
     var teamCounts = d3.rollups(
         top20,
         v => v.length,
