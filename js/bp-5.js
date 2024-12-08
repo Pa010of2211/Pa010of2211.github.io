@@ -4,13 +4,13 @@ Promise.all([
     d3.csv('./data/player_savant_data.csv'),
 ]).then(([data]) => {
     const rankedData = calculateRanks(data);
-    console.log(rankedData.length);
+    // console.log(rankedData.length);
     bp5_data.set('xWOBA', +rankedData[97]['xwoba_rank']/rankedData.length);
     bp5_data.set('Sweet Spot %', +rankedData[97]['sweet_spot_percent_rank']/rankedData.length);
     bp5_data.set('Barrel %', +rankedData[97]['barrel_batted_rate_rank']/rankedData.length);
     bp5_data.set('K %', 1-(+rankedData[97]['k_percent_rank']/rankedData.length));
     bp5_data.set('Exit Velocity', +rankedData[97]['avg_hyper_speed_rank']/rankedData.length);
-    console.log(Array.from(bp5_data.entries()));
+    // console.log(Array.from(bp5_data.entries()));
 
     const maxValue = 1;  // Maximum value for normalization
     const levels = 5;
