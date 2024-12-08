@@ -71,3 +71,24 @@ d3.csv("data/player_pitchers_top_200_SOs.csv").then(data => {
         .style("font-size", "12px")
         .style("fill", "black");
 });
+
+// X-axis label
+bp1svg.append("text")
+    .attr("x", (bp1width / 2)) 
+    .attr("y", bp1height - 10) 
+    .attr("text-anchor", "middle")
+    .style("font-size", "14px")
+    .style("fill", "black")
+    .text("Team");
+
+// Y-axis label
+bp1svg.append("text")
+    .attr("transform", "rotate(-90)") 
+    .attr("x", -(bp1height / 2)) 
+    .attr("y", 15) 
+    .attr("text-anchor", "middle")
+    .style("font-size", "14px")
+    .style("fill", "black")
+    .text("Number of Top 20 Pitchers (by ERA)");
+
+    
