@@ -17,7 +17,7 @@ d3.csv("./data/team_data.csv").then(data => {
 
     // Add y-axis
     kc8_bars.append("g")
-        .attr("class", "axis")
+        .attr("class", "kc8-yaxis")
         .attr("transform", `translate(-5, 0)`)
         .call(d3.axisLeft(yScale));
     
@@ -36,6 +36,8 @@ d3.csv("./data/team_data.csv").then(data => {
         kc8_bars.selectAll(".bar").remove();
         kc8_updated = kc8_bars.selectAll(".bar").data(top8);
         
+        const xAxis = d3.axisTop(xScale);
+
         kc8_updated.enter()
             .append("rect")
             .attr("class", "bar")
@@ -48,12 +50,12 @@ d3.csv("./data/team_data.csv").then(data => {
                 return value != null ? kc8_colorScale(value) : "#000000";
             });
         kc8_updated.exit().remove();
-        kc8_bars.select(".axis").remove();
+        kc8_bars.select(".kc8_axis").remove();
         // Add x-axis at the top
         kc8_bars.append("g")
-            .attr("class", "axis")
+            .attr("class", "kc8_axis")
             .attr("transform", `translate(0, 0)`)
-            .call(d3.axisTop(xScale));
+            .call(xAxis);
         
         kc8_bars.selectAll(".image").remove();
         kc8_bars.selectAll(".image")
@@ -74,6 +76,17 @@ d3.csv("./data/team_data.csv").then(data => {
                 // Remove the image if not found
                 d3.select(this).remove();
             });
+
+        kc8_bars.selectAll(".label").remove();
+        kc8_bars.selectAll(".label")
+            .data(top8)
+            .enter()
+            .append("text")
+            .attr("class", "label")
+            .attr("x", d => xScale(d['Team']) + xScale.bandwidth() / 2)
+            .attr("y", svgHeight - 15) // Position below the bars
+            .attr("text-anchor", "middle")
+            .text(d => d['PA']);
     };
 
     

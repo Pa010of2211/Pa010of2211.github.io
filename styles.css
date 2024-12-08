@@ -159,3 +159,7 @@ text.xaxis-label {
     font-size: 18px;
     font-weight: 200;
 }
+
+.kc8_axis .tick text{
+    color: white;
+}
