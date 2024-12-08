@@ -12,7 +12,9 @@ Promise.all([
     pm8_data.set('TB perc.', +rankedData1[5]['TB_rank']/30);
     pm8_data.set('F% perc.', +rankedData1[5]['Fld%_rank']/30);
     pm8_data.set('WHIP perc.', +rankedData2[5]['WHIP_rank']/30);
-    //console.log(Array.from(pm8_data.entries()));
+
+    // console.log(Array.from(pm8_data.entries()));
+
 
     const maxValue = 1;  // Maximum value for normalization
     const levels = 5;
