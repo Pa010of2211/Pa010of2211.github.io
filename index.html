@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CS-4460 Prototype v1.1</title>
+    <title>CS-4460 Prototype v1.2</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -21,9 +21,26 @@
         <section class="page">
             Page 4
         </section>
-        <section class="page">
+        <section class="page" id="kc8_pg">
             Page 5 &emsp;
-            <svg id="p5" width="800" height="350" style="border: 1px solid #777;"></svg>
+            <b><br><br>Filter by Playoffs status:</b>
+            <select id="kc8Selector">
+                <option value='0'>All Teams</option>
+                <option value='1'>In Postseason</option>
+                <option value='2'>Division Series</option>
+                <option value='3'>Championship Series</option>
+                <option value='4'>World Series</option>
+            </select>
+            <svg id="p5" width="700" height="800">
+                <polygon points="350,750 46,488 46,75 654,75 654,488" 
+                id="kc-8" fill="BurlyWood" 
+                stroke="black" 
+                stroke-width="2"/>
+            </svg>
+        </section>
+        <section class="page">
+            Page 6 &emsp;
+            <svg id="p6" width="800" height="350" style="border: 1px solid #777;"></svg>
         </section>
     </div>
 
@@ -34,6 +51,7 @@
         <button class="navdot" data-page="2"></button>
         <button class="navdot" data-page="3"></button>
         <button class="navdot" data-page="4"></button>
+        <button class="navdot" data-page="5"></button>
     </div>
 
     <script src="https://d3js.org/d3.v6.min.js"></script>
@@ -43,6 +61,7 @@
 
     <script src="./js/bp-3.js"></script>
     <script src="./js/bp-5.js"></script>
+    <script src="./js/kc-8.js"></script>
     <script src="./js/pm-8.js"></script>
 
     <script src="./js/main.js"></script>

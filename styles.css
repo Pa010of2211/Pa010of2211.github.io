@@ -132,9 +132,14 @@ text.yaxis-label {
 }
 
 .pm-8-axis-label {
-    font-size: 12px;
+   font-size: 12px;
     fill: #333;
-}
+} 
+
+.star-plot-label {
+    font-size: 24px;
+     fill: #333;
+ } 
 .pm-8-area {
     fill: steelblue;
     opacity: 0.6;
@@ -145,7 +150,12 @@ text.yaxis-label {
     fill: none;
 }
 
-text.star-plot-label {
+text.xaxis-label {
     font-size: 18px;
     font-weight: 500;
+}
+
+#kc8_pg {
+    font-size: 18px;
+    font-weight: 200;
 }

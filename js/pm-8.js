@@ -17,7 +17,7 @@ Promise.all([
     const maxValue = 1;  // Maximum value for normalization
     const levels = 5;
 
-    var svg = d3.select("#p5");
+    var svg = d3.select("#p6");
 
     var svgWidth = +svg.attr('width');
     var svgHeight = +svg.attr('height');
@@ -33,7 +33,7 @@ Promise.all([
 
     svg_center.append('text')
         .attr('class', 'star-plot-label')
-        .attr('transform', 'translate('+[-120,175]+')').text("Texas Rangers, 2023 (relative)");
+        .attr('transform', 'translate('+[-150,175]+')').text("Texas Rangers, 2023 (relative)");
 
     // Angle for each axis
     const angleSlice = (Math.PI * 2) / pm8_data.size;
