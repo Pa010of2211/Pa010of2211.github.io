@@ -1,17 +1,16 @@
-var svg = d3.select('#p2');
+var bp3_svg = d3.select('#p2');
 
 // Get layout parameters
-var svgWidth = +svg.attr('width');
-var svgHeight = +svg.attr('height');
+var svgWidth = +bp3_svg.attr('width');
+var svgHeight = +bp3_svg.attr('height');
 
 var padding = {t: 40, r: 40, b: 40, l: 40};
 var cellPadding = 10;
 
 // Create a group element for appending chart elements
-var chartG = svg.append('g')
+var chartG = bp3_svg.append('g')
     .attr('transform', 'translate('+[padding.l, padding.t]+')');
 
-var dataAttributes = null;
 var N = 1;
 
 // Compute chart dimensions
@@ -19,13 +18,9 @@ var cellWidth = (svgWidth - padding.l - padding.r);
 var cellHeight = (svgHeight - padding.t - padding.b);
 
 // Global x and y scales to be used for all SplomCells
-var xScale = d3.scaleLinear().range([0, cellWidth - cellPadding]);
-var yScale = d3.scaleLinear().range([cellHeight - cellPadding, 0]);
-// axes that are rendered already for you
-var xAxis = d3.axisBottom(xScale);
-var yAxis = d3.axisLeft(yScale).ticks(6).tickSize(-cellWidth * N, 0, 0);
+var bp3_xScale = d3.scaleLinear().range([0, cellWidth - cellPadding]);
+var bp3_yScale = d3.scaleLinear().range([cellHeight - cellPadding, 0]);
 // Ordinal color scale for cylinders color mapping
-var customColors = ['#ff5733', '#ffbd69', '#45aaf2', '#2ecc71','#8e44ad','#f7dc6f', '#3498db', '#fd79a8', '#1abc9c', '#f39c12' ];
 const colorScale = d3.scaleLinear()
     .domain([0,5])
     .range(["darkred", "green"]);
@@ -47,7 +42,7 @@ const status_map = new Map([
 scatterplot = chartG.append('g').attr('class', 'cell')
     .attr("transform", "translate("+[cellPadding / 2, cellPadding / 2]+")");
         
-    sp_xAxis = scatterplot.append('g')
+sp_xAxis = scatterplot.append('g')
     .attr('class', 'x axis')
     .attr('transform', 'translate('+[cellPadding / 2, 0]+')');
 
@@ -80,12 +75,12 @@ var toolTip1 = d3.tip()
 d3.csv('data/team_data.csv').then(function(dataset) {
     teams = dataset;
     
-    yScale.domain([0.3, 1]);
-    xScale.domain([0, 3]);
-    sp_xAxis.call(d3.axisBottom(xScale).ticks(0).tickSize(cellHeight - cellPadding, 0, 0));
+    bp3_yScale.domain([0.3, 1]);
+    bp3_xScale.domain([0, 3]);
+    sp_xAxis.call(d3.axisBottom(bp3_xScale).ticks(0).tickSize(cellHeight - cellPadding, 0, 0));
     //.selectAll(".xaxis-label").text("2023 Teams");
         
-    sp_yAxis.call(d3.axisLeft(yScale).ticks(6).tickSize(-(cellWidth - cellPadding), 0, 0));
+    sp_yAxis.call(d3.axisLeft(bp3_yScale).ticks(6).tickSize(-(cellWidth - cellPadding), 0, 0));
     //d3.selectAll(".yaxis-label").text("W/L %");
 
     const spbrush = d3.brushY()
@@ -99,14 +94,32 @@ d3.csv('data/team_data.csv').then(function(dataset) {
             .attr('transform', 'translate('+[cellPadding / 2, cellPadding / 2]+')')
             .call(spbrush);
     
-    svg.call(toolTip1);
+    bp3_svg.call(toolTip1);
 
-    scatterplot.selectAll(".dotp1")
+    sp_points = scatterplot.selectAll(".bp3_dot")
+        .data(dataset).enter()
+        .append("circle")
+        .attr('class', 'bp3_dot')
+        .attr("cx", function (d) {
+            var xbase = 1.9;
+            if (d['Playoff'] == 0) {
+                xbase = 0.65;
+            };
+            return bp3_xScale(xbase + Math.random() * 0.2);
+        })
+        .attr("cy", d => bp3_yScale(+d['WL%']))
+        .attr("r", 5)
+        .attr("fill", d => {
+            const value = d['Playoff'];
+            return value != null ? colorScale(value) : "#000000";
+        }).on('mouseover', toolTip1.show)
+        .on('mouseout', toolTip1.hide);
+    /*scatterplot.selectAll(".dotp1")
         .data(dataset.filter(d => +d['Playoff'] == 0)).enter()
         .append("circle")
         .attr('class', 'dotp1')
-        .attr("cx", d => xScale(0.65 + Math.random() * 0.2))
-        .attr("cy", d => yScale(+d['WL%']))
+        .attr("cx", d => bp3_xScale(0.65 + Math.random() * 0.2))
+        .attr("cy", d => bp3_yScale(+d['WL%']))
         .attr("r", 5)
         .attr("fill", d => {
             const value = d['Playoff'];
@@ -118,14 +131,14 @@ d3.csv('data/team_data.csv').then(function(dataset) {
         .data(dataset.filter(d => +d['Playoff'] > 0)).enter()
         .append("circle")
         .attr('class', 'dotp2')
-        .attr("cx", d => xScale(1.9 + Math.random() * 0.2))
-        .attr("cy", d => yScale(+d['WL%']))
+        .attr("cx", d => bp3_xScale(1.9 + Math.random() * 0.2))
+        .attr("cy", d => bp3_yScale(+d['WL%']))
         .attr("r", 5)
         .attr("fill", d => {
             const value = d['Playoff'];
             return value != null ? colorScale(value) : "#000000";
         }).on('mouseover', toolTip1.show)
-        .on('mouseout', toolTip1.hide);;
+        .on('mouseout', toolTip1.hide);*/
 
     function spbrushstart(event) {
         // Check if this g element is different than the previous brush
@@ -135,8 +148,8 @@ d3.csv('data/team_data.csv').then(function(dataset) {
             //mapbrush.move(d3.select(brushCell), null);
 
             // Update the global scales for the subsequent brushmove events
-            yScale.domain([0.3, 1]);
-            xScale.domain([0, 3]);
+            bp3_yScale.domain([0.3, 1]);
+            bp3_xScale.domain([0, 3]);
 
             // Save the state of this g element as having an active brush
             brushCell = this;
@@ -153,18 +166,18 @@ d3.csv('data/team_data.csv').then(function(dataset) {
             // Select all .dot circles, and add the "hidden" class if the data for that circle
             // lies outside of the brush-filter applied for this SplomCells x and y attributes
             selectedPoints = teams.filter(function(d){
-                return e[0] <= yScale(d['WL%']) && yScale(d['WL%']) <= e[1];
+                return e[0] <= bp3_yScale(d['WL%']) && bp3_yScale(d['WL%']) <= e[1];
             });
 
-            svg.selectAll(".dotp1").classed("hidden", true).classed("highlight", false);
+            bp3_svg.selectAll(".bp3_dot").classed("hidden", true).classed("highlight", false);
             
-            svg.selectAll(".dotp1").data(dataset).classed("hidden", d => !selectedPoints.includes(d))
+            bp3_svg.selectAll(".bp3_dot").data(dataset).classed("hidden", d => !selectedPoints.includes(d))
                 .classed("highlight", d => selectedPoints.includes(d));
-
+            /*
             svg.selectAll(".dotp2").classed("hidden", true).classed("highlight", false);
         
             svg.selectAll(".dotp2").data(dataset).classed("hidden", d => !selectedPoints.includes(d))
-                .classed("highlight", d => selectedPoints.includes(d));
+                .classed("highlight", d => selectedPoints.includes(d));*/
         }
     }
 
@@ -172,8 +185,8 @@ d3.csv('data/team_data.csv').then(function(dataset) {
         // If there is no longer an extent or bounding box then the brush has been removed
         if(!event.selection) {
             // Bring back all hidden .dot elements
-            svg.selectAll('.hidden').classed('hidden', false);
-            svg.selectAll('.highlight').classed('highlight', false);
+            bp3_svg.selectAll('.hidden').classed('hidden', false);
+            bp3_svg.selectAll('.highlight').classed('highlight', false);
             // Return the state of the active brushCell to be undefined
             brushCell = undefined;
         }
