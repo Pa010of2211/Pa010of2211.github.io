@@ -114,7 +114,7 @@ body {
 }
 #p5_text {
     position: relative;
-    left: -300px;
+    left: -200px;
     top: 0px;
     inline-size: 500px;
     padding-right: 15px;
@@ -145,6 +145,11 @@ body {
 .page_text {
     font-size: 20px;
     color:black;
+    position: relative;
+    padding-right: 15px;
+    padding-left: 15px;
+    left: -50px;
+    text-align: center;
 }
 
 .nav {
