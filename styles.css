@@ -81,9 +81,20 @@ body {
     border-style: none;
 }
 
-/*#p2_g {
 
-}*/
+#p3_text {
+    inline-size: 400px;
+    padding-right: 30px;
+    padding-right: 15px;
+    max-height: 500px;
+    text-align: center;
+    overflow-wrap: break-word;
+    background: rgba(255, 255, 255, 0.5);
+    border: 2px solid black;
+
+}
+
+
 .nav {
     position: fixed;
     top: 50%;
