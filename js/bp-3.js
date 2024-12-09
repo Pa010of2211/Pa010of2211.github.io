@@ -98,11 +98,10 @@ const textGroup = bp3_svg.append("text")
     .style("font-size", "24px")
     .style("fill", "black");
 
-// Add multiple lines of text using tspans
 textLines.forEach((line, index) => {
     textGroup.append("tspan")
-        .attr("x", boxX + boxWidth / 2) // Center horizontally
-        .attr("dy", index === 0 ? "0" : "1.2em") // Offset each line (first line stays at y)
+        .attr("x", boxX + boxWidth / 2)
+        .attr("dy", index === 0 ? "0" : "1.2em")
         .text(line);
 });
 
@@ -116,11 +115,10 @@ const textGroup2 = bp3_svg.append("text")
     .style("font-size", "24px")
     .style("fill", "white");
 
-// Add multiple lines of text using tspans
 textLines2.forEach((line, index) => {
     textGroup2.append("tspan")
-        .attr("x", boxX + boxWidth / 2) // Center horizontally
-        .attr("dy", index === 0 ? "0" : "1.2em") // Offset each line (first line stays at y)
+        .attr("x", boxX + boxWidth / 2)
+        .attr("dy", index === 0 ? "0" : "1.2em") 
         .text(line);
 });
 //Arrowhead

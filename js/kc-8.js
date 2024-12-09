@@ -74,6 +74,7 @@ d3.csv("./data/team_data.csv").then(data => {
             })
             .on("error", function () {
                 // Remove the image if not found
+                console.log("ERROR submitting " + top8)
                 d3.select(this).remove();
             });
 

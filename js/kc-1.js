@@ -41,7 +41,8 @@ d3.csv("data/team_data.csv").then(data => {
         .style("border-radius", "5px")
         .style("font-size", "12px")
         .style("pointer-events", "none")
-        .style("display", "none");
+        .style("display", "none")
+        .style("z-index", "999");
 
     data.forEach((d, i) => {
         var angle = angleScale(i) * (Math.PI / 180); 
