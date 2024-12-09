@@ -16,6 +16,7 @@ body {
     height: 100vh; /* One page per section */
     overflow: auto; /* Allow controlled scrolling */
     scroll-snap-type: y mandatory; /* Snap to each section vertically */
+    fill-opacity: .01;
 }
 
 .page {
@@ -29,12 +30,28 @@ body {
 
 .page:nth-child(odd) {
     background-color: #f0f0f0;
+    fill-opacity: .1;
 }
 
 .page:nth-child(even) {
+    fill-opacity: .1;
     background-color: #cce7ff;
 }
-  
+
+.page:nth-child(odd) > *{
+    background-color: #f0f0f0;
+    position: relative; /* Ensures content inside has higher stacking context */
+    z-index: 2;
+    fill-opacity: 1;
+}
+
+.page:nth-child(even) > *{
+    background-color: #cce7ff;
+    position: relative; /* Ensures content inside has higher stacking context */
+    z-index: 2;
+    fill-opacity: 1;
+}
+
 /* Optional navigation */
 .nav {
     position: fixed;
@@ -161,5 +178,18 @@ text.xaxis-label {
 }
 
 .kc8_axis .tick text{
-    color: white;
+    fill-opacity: .1;
+}
+
+img#main_field {
+    position: absolute; /* Position relative to the viewport */
+    top: 50%; /* Initial position */
+    left: 70%;
+    rotate: 0deg;
+    transform: translate(-50%, -50%);
+    width: 1000px;
+    height: auto;
+    transition: all 0.5s ease; /* Smooth position transitions */
+    pointer-events: none;
+    z-index: 0;
 }
