@@ -62,7 +62,7 @@ d3.csv("data/team_data.csv").then(data => {
             .attr("y1", homeY)
             .attr("x2", infieldX2)
             .attr("y2", infieldY2)
-            .attr("stroke", "white")
+            .attr("stroke", "white") 
             .attr("stroke-width", 2)
             .attr("opacity", 0.3)
             .on("mouseover", function () {
