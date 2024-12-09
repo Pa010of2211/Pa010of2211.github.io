@@ -98,6 +98,50 @@ body {
     padding: 10px;
 }
 
+#p5_title {
+    position: relative;
+    left: 200px;
+    top: -300px;
+    color: white;
+    background: none;
+}
+#kc8Selector {
+    height: 50px;
+    position: relative;
+    left: 220px;
+    top: -300px;
+    font-size: 18px;
+}
+#p5_text {
+    position: relative;
+    left: -300px;
+    top: 0px;
+    inline-size: 500px;
+    padding-right: 15px;
+    padding-left: 15px;
+    max-height: 500px;
+    text-align: center;
+    overflow-wrap: break-word;
+    background: rgba(255, 255, 255, 0.5);
+    border: 2px solid black;
+    font-size: 24px;
+}
+
+#p8_text {
+    position: relative;
+    left: 50px;
+    top: -300px;
+    inline-size: 700px;
+    padding-right: 15px;
+    padding-left: 15px;
+    max-height: 500px;
+    text-align: center;
+    overflow-wrap: break-word;
+    background: rgba(255, 255, 255, 0.5);
+    border: 2px solid black;
+    font-size: 24px;
+
+}
 .page_text {
     font-size: 20px;
     color:black;
@@ -229,7 +273,7 @@ text.xaxis-label {
 }
 
 .kc8_axis .tick text{
-    fill-opacity: .1;
+    fill-opacity: .01;
 }
 
 img#main_field {
